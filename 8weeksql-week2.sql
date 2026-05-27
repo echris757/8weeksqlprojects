@@ -370,11 +370,11 @@ SELECT
 FROM (
 	SELECT
 		runner_id,
-		COUNT(order_id) FILTER (WHERE cancellation LIKE 'N') AS success_orders, --removes cancellations
-		COUNT(order_id) AS all_orders
+		COUNT(DISTINCT order_id) FILTER (WHERE cancellation LIKE 'N') AS success_orders, --removes cancellations
+		COUNT(DISTINCT order_id) AS all_orders
 	FROM master_table
 	GROUP BY runner_id
-); -- 1 had 100% success, 2 had 83.3%, and 3 had 50%
+); -- 1 had 100% success, 2 had 75%, and 3 had 50%
 
 -- 17. Total earnings (meat lovers = $12 and veg = $10)
 WITH price_cte AS (
